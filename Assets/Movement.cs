@@ -27,5 +27,15 @@ public class Movement : MonoBehaviour
            Debug.Log("Pressed right");
            _rigidBody.AddRelativeForce(Vector3.right * 5f);
        } 
+       if (Input.GetKey(KeyCode.UpArrow))
+       {
+           Debug.Log("Pressed right");
+           _rigidBody.AddRelativeForce(Vector3.forward * 5f);
+       } 
+       if (Input.GetKey(KeyCode.DownArrow))
+       {
+           Debug.Log("Pressed right");
+           _rigidBody.AddRelativeForce(Vector3.back * 5f);
+       } 
     }
 }
