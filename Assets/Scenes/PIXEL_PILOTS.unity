@@ -195,7 +195,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 02b626a19cc8ee843b147651587a8964, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5804a36105db6594a8f27c00f049bc56, type: 2}
+      objectReference: {fileID: 2100000, guid: 5949987d768488d49ba6d1ca06d2df68, type: 2}
     - target: {fileID: 919132149155446097, guid: 02b626a19cc8ee843b147651587a8964, type: 3}
       propertyPath: m_Name
       value: runway

@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class IP_Airplane_menus : MonoBehaviour
+public class IP_Airplane_menus : Editor
 {
-    // Start is called before the first frame update
-    void Start()
+    [MenuItem("Airplane Tools/Create new airplane")]
+    public static void CreateNewAirplane()
     {
-        
-    }
+        var curSelected = Selection.activeGameObject;
+        if (curSelected != null)
+        {
+            var curController = curSelected.AddComponent<IP_Airplane_controller>();
+            var curCog = new GameObject("COG");
+            curCog.transform.SetParent(curSelected.transform);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            curController.centerOfGravitiyPosition = curCog.transform;
+        }
     }
 }

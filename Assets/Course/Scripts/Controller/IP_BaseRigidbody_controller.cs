@@ -6,10 +6,10 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class IP_BaseRigidbody_controller : MonoBehaviour
 {
-    private Rigidbody _rigidbody;
-    private AudioSource _audioSource;
+    protected Rigidbody _rigidbody;
+    protected AudioSource _audioSource;
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _audioSource = GetComponent<AudioSource>();
