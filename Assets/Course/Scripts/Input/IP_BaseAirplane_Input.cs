@@ -40,7 +40,5 @@ public class IP_BaseAirplane_Input : MonoBehaviour
             Flaps -= 1;
 
         Flaps = Mathf.Clamp(Flaps, 0, MaxFlapIncrements);
-
-        Debug.Log($"Pitch: {Pitch}, Roll: {Roll}, Yaw: {Yaw}, Throttle: {Throttle}, Brake: {Brake}, Flaps: {Flaps}");
     }
 }

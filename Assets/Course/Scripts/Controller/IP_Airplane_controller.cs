@@ -13,14 +13,15 @@ public class IP_Airplane_controller : IP_BaseRigidbody_controller
 
     [Header("Engines")] public List<IP_Airplane_engine> engines = new List<IP_Airplane_engine>();
     [Header("Wheels")] public List<IP_Airplane_wheel> wheels = new List<IP_Airplane_wheel>();
+
     public override void Start()
     {
         base.Start();
-        
+
         if (_rigidbody == null) return;
-        
+
         _rigidbody.mass = airplaneWeight;
-        
+
         if (centerOfGravitiyPosition != null)
         {
             _rigidbody.centerOfMass = centerOfGravitiyPosition.localPosition;
@@ -30,13 +31,16 @@ public class IP_Airplane_controller : IP_BaseRigidbody_controller
         {
             foreach (var wheel in wheels)
             {
-                
+                wheel.InitWheel();
             }
         }
     }
 
     protected override void HandlePhysics()
     {
+        if (input == null)
+            return;
+
         HandleEngines();
         HandleAerodynamics();
         HandleSteering();
@@ -46,32 +50,28 @@ public class IP_Airplane_controller : IP_BaseRigidbody_controller
 
     private void HandleEngines()
     {
-        if (engines.Any())
+        if (!engines.Any()) return;
+
+        foreach (var engine in engines)
         {
-            foreach (var engine in engines)
-            {
-                
-            }
+            var thrust = engine.CalculateForce(input.Throttle);
+            _rigidbody.AddForce(thrust);
         }
     }
 
     private void HandleAerodynamics()
     {
-        throw new System.NotImplementedException();
     }
 
     private void HandleSteering()
     {
-        throw new System.NotImplementedException();
     }
 
     private void HandleBrakes()
     {
-        throw new System.NotImplementedException();
     }
 
     private void HandleAltitude()
     {
-        throw new System.NotImplementedException();
     }
 }
