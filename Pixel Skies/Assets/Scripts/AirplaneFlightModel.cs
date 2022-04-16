@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO - Create a base class and then inherit for an arcade flight model and a sim flight model
 public class AirplaneFlightModel : MonoBehaviour
 {
     private const float MpsToKnotFactor = 1.94384f;
     
     private Rigidbody _rigidbody;
+    
     private float _initialDrag;
     private float _initialAngularDrag;
+    
     private float _maxSpeedInMps;
     private float _normalizedSpeedInKnots;
+
+    private float _angleOfAttack;
     
     [Header("Speed Attributes")]
     public float forwardSpeed;
@@ -53,10 +58,15 @@ public class AirplaneFlightModel : MonoBehaviour
 
     private void CalculateLift()
     {
+        _angleOfAttack = Vector3.Dot(_rigidbody.velocity.normalized, transform.forward);
+        _angleOfAttack *= _angleOfAttack;
+        
+        Debug.Log($"AoA: {_angleOfAttack}");
+
         var liftDirection = transform.up;
         var liftForce = liftCurve.Evaluate(_normalizedSpeedInKnots) * maxLiftForce;
         
-        var finalLiftForce = liftDirection * liftForce;
+        var finalLiftForce = liftDirection * liftForce * _angleOfAttack;
         _rigidbody.AddForce(finalLiftForce);
     }
 
