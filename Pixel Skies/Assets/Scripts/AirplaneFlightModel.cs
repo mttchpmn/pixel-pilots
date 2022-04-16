@@ -44,6 +44,19 @@ public class AirplaneFlightModel : MonoBehaviour
         CalculateForwardSpeed();
         CalculateLift();
         CalculateDrag();
+        HandleRigidBodyTransform();
+    }
+
+    private void HandleRigidBodyTransform()
+    {
+        if (!(_rigidbody.velocity.magnitude > 1)) return;
+        
+        var updatedVelocity = Vector3.Lerp(_rigidbody.velocity, transform.forward * forwardSpeed, forwardSpeed * _angleOfAttack * Time.deltaTime);
+        _rigidbody.velocity = updatedVelocity;
+
+        var updatedRotation = Quaternion.Slerp(_rigidbody.rotation,
+            Quaternion.LookRotation(_rigidbody.velocity.normalized, transform.up), Time.deltaTime);
+        _rigidbody.MoveRotation(updatedRotation);
     }
 
     private void CalculateForwardSpeed()
