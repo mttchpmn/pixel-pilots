@@ -54,11 +54,6 @@ public class AirplaneFlightModel : MonoBehaviour
         var liftDirection = transform.up;
         var liftForce = liftCurve.Evaluate(_normalizedSpeedInKnots) * maxLiftForce;
         
-        // OLD WAY: This works tho
-        // var liftForce = forwardSpeed * maxLiftForce;
-        
-        Debug.Log($"LIFT FORCE: {liftForce}");
-
         var finalLiftForce = liftDirection * liftForce;
         _rigidbody.AddForce(finalLiftForce);
     }
