@@ -1,0 +1,24 @@
+Controls:
+- Pitch, roll, and yaw reponse should be proportional to airflow speed over
+  control surfaces
+
+Handling:
+- Thrust should account for inertia when rolling from standstill
+
+
+Flight Data required:
+- Pitch angle (relative to ground)
+- Roll angle (relative to ground
+- Yaw angle (relative to direction of travel)
+
+- Ground speed (relative to flat ground)
+- Airspeed (relative to RAF)
+- Angle of attack (to relative airflow)
+
+Aircraft logic components:
+- Input (Capture user input)
+- Flight controller (Orchestrate flight logic)
+- Flight data (Capture data points)
+- Flight model (Handle aerodynamic / drag forces)
+- Engines (Handle thrust forces)
+- Wheels (Handle wheel colliders / steering?)
