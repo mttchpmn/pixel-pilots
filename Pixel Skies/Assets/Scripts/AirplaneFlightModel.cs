@@ -9,17 +9,25 @@ public class AirplaneFlightModel : MonoBehaviour
     private Rigidbody _rigidbody;
     private float _initialDrag;
     private float _initialAngularDrag;
+    private float _maxSpeedInMps;
+    private float _normalizedSpeedInKnots;
     
-    [Header("Flight Attributes")]
+    [Header("Speed Attributes")]
     public float forwardSpeed;
     public float speedInKnots;
+    public float maxSpeedInKnots = 101f;
+    
+    [Header("Lift Attributes")]
     public float maxLiftForce = 800f;
+    public AnimationCurve liftCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
     public void InitializeFlightModel(Rigidbody rb)
     {
         _rigidbody = rb;
         _initialDrag = rb.drag;
         _initialAngularDrag = rb.angularDrag;
+
+        _maxSpeedInMps = maxSpeedInKnots / MpsToKnotFactor;
     }
 
     public void UpdateFlightModel()
@@ -34,14 +42,22 @@ public class AirplaneFlightModel : MonoBehaviour
     private void CalculateForwardSpeed()
     {
         var localVelocity = transform.InverseTransformDirection(_rigidbody.velocity);
-        forwardSpeed = localVelocity.z;
+        forwardSpeed = Mathf.Max(0f, localVelocity.z);
+        forwardSpeed = Mathf.Clamp(forwardSpeed, 0f, _maxSpeedInMps);
+        
         speedInKnots = forwardSpeed * MpsToKnotFactor;
+        _normalizedSpeedInKnots = Mathf.InverseLerp(0f, maxSpeedInKnots, speedInKnots);
     }
 
     private void CalculateLift()
     {
         var liftDirection = transform.up;
-        var liftForce = forwardSpeed * maxLiftForce;
+        var liftForce = liftCurve.Evaluate(_normalizedSpeedInKnots) * maxLiftForce;
+        
+        // OLD WAY: This works tho
+        // var liftForce = forwardSpeed * maxLiftForce;
+        
+        Debug.Log($"LIFT FORCE: {liftForce}");
 
         var finalLiftForce = liftDirection * liftForce;
         _rigidbody.AddForce(finalLiftForce);

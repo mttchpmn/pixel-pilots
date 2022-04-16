@@ -36,8 +36,6 @@ public class AirplaneInputBase : MonoBehaviour
             Flaps -= 1;
 
         Flaps = Mathf.Clamp(Flaps, 0, MaxFlapIncrements);
-        
-        Debug.Log($"{Pitch} {Roll} {Yaw}");
     }
 
     private void HandleThrottleChange()
