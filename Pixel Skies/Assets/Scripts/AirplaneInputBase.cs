@@ -8,16 +8,13 @@ public class AirplaneInputBase : MonoBehaviour
     public int Flaps { get; protected set; } = 0;
     public float Brake { get; protected set; } = 0f;
     public float Throttle { get; protected set; } = 0f;
+    public float ThrottleSetting { get; protected set; }
 
+    [Header("Input Attributes")]
+    public float ThrottleSpeed = 0.1f;
     public int MaxFlapIncrements = 2;
     public KeyCode BrakeKey = KeyCode.Space;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         HandleInput();
@@ -29,6 +26,7 @@ public class AirplaneInputBase : MonoBehaviour
         Roll = Input.GetAxis("Horizontal");
         Yaw = Input.GetAxis("Yaw");
         Throttle = Input.GetAxis("Throttle");
+        HandleThrottleChange();
 
         Brake = Input.GetKey(BrakeKey) ? 1f : 0f;
 
@@ -40,5 +38,11 @@ public class AirplaneInputBase : MonoBehaviour
         Flaps = Mathf.Clamp(Flaps, 0, MaxFlapIncrements);
         
         Debug.Log($"{Pitch} {Roll} {Yaw}");
+    }
+
+    private void HandleThrottleChange()
+    {
+        ThrottleSetting += (Throttle * ThrottleSpeed * Time.deltaTime);
+        ThrottleSetting = Mathf.Clamp01(ThrottleSetting);
     }
 }

@@ -60,7 +60,7 @@ public class AirplaneController : RigidbodyControllerBase
 
         foreach (var engine in engines)
         {
-            var thrust = engine.CalculateForce(input.Throttle);
+            var thrust = engine.CalculateForce(input.ThrottleSetting);
             _rigidbody.AddForce(thrust);
         }
     }

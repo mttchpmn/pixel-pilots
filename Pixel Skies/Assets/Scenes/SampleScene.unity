@@ -253,6 +253,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  propeller: {fileID: 801242993}
 --- !u!4 &202904232
 Transform:
   m_ObjectHideFlags: 0
@@ -371,6 +372,7 @@ GameObject:
   - component: {fileID: 495632420}
   - component: {fileID: 495632418}
   - component: {fileID: 495632419}
+  - component: {fileID: 495632421}
   m_Layer: 0
   m_Name: AVRO_CADET
   m_TagString: Untagged
@@ -425,6 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd02f86f71be8a44f923592466365353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrottleSpeed: 0.3
   MaxFlapIncrements: 2
   BrakeKey: 32
 --- !u!114 &495632419
@@ -440,7 +443,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 495632418}
-  centerOfGravitiyPosition: {fileID: 635018625}
+  flightModel: {fileID: 495632421}
+  centerOfGravityPosition: {fileID: 635018625}
   airplaneWeight: 400
   engines:
   - {fileID: 202904231}
@@ -544,6 +548,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &495632421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495632415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b47e48a7bb323478746c65eecbf8a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardSpeed: 0
+  speedInKnots: 0
 --- !u!1 &595631724
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,6 +853,23 @@ CapsuleCollider:
   m_Height: 3.673312
   m_Direction: 2
   m_Center: {x: 0, y: -0.09039128, z: 1.2428817}
+--- !u!1 &801242989 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3071180390171350127, guid: 61eaaccd744e9524c82bd294bce312f9, type: 3}
+  m_PrefabInstance: {fileID: 821032584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &801242993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801242989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f0a7e7aeae7c764f843ade3fa742f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &821032584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -842,6 +877,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 495632416}
     m_Modifications:
+    - target: {fileID: -8686234636439484044, guid: 61eaaccd744e9524c82bd294bce312f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9000369
+      objectReference: {fileID: 0}
+    - target: {fileID: -8686234636439484044, guid: 61eaaccd744e9524c82bd294bce312f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8686234636439484044, guid: 61eaaccd744e9524c82bd294bce312f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.43581378
+      objectReference: {fileID: 0}
+    - target: {fileID: -8686234636439484044, guid: 61eaaccd744e9524c82bd294bce312f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -51.674
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61eaaccd744e9524c82bd294bce312f9, type: 3}
       propertyPath: m_RootOrder
       value: 0

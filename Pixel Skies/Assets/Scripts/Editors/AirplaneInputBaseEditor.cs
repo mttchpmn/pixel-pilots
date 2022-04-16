@@ -28,7 +28,11 @@ public class AirplaneInputBaseEditor : Editor
         debugInfo += $"Flaps: \t\t{_targetInput.Flaps}\n";
 
         GUILayout.Space(10);
+        GUILayout.Label("Input Values");
         EditorGUILayout.TextArea(debugInfo, GUILayout.Height(100));
+        GUILayout.Space(10);
+        GUILayout.Label("Computed Values");
+        EditorGUILayout.TextField($"Throttle Setting: {_targetInput.ThrottleSetting}");
         GUILayout.Space(20);
         
         Repaint();
