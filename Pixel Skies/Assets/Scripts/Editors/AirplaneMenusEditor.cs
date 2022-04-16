@@ -15,7 +15,7 @@ public class AirplaneMenusEditor : Editor
             var curCog = new GameObject("COG");
             curCog.transform.SetParent(curSelected.transform);
 
-            curController.centerOfGravitiyPosition = curCog.transform;
+            curController.centerOfGravityPosition = curCog.transform;
         }
     }
 }

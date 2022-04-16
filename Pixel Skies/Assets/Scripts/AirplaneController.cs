@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(AirplaneFlightModel))]
 public class AirplaneController : RigidbodyControllerBase
 {
-    [Header("Base Airplane Properties")] public AirplaneInputBase input;
-
-    public Transform centerOfGravitiyPosition;
+    [Header("Base Airplane Properties")]
+    public AirplaneInputBase input;
+    public AirplaneFlightModel flightModel;
+    public Transform centerOfGravityPosition;
 
     [Tooltip("Weight in kilograms")] public float airplaneWeight = 400f;
 
@@ -22,9 +24,9 @@ public class AirplaneController : RigidbodyControllerBase
 
         _rigidbody.mass = airplaneWeight;
 
-        if (centerOfGravitiyPosition != null)
+        if (centerOfGravityPosition != null)
         {
-            _rigidbody.centerOfMass = centerOfGravitiyPosition.localPosition;
+            _rigidbody.centerOfMass = centerOfGravityPosition.localPosition;
         }
 
         if (wheels.Any())
@@ -34,6 +36,10 @@ public class AirplaneController : RigidbodyControllerBase
                 wheel.InitWheel();
             }
         }
+
+        flightModel = GetComponent<AirplaneFlightModel>();
+        if (flightModel != null)
+            flightModel.InitializeFlightModel(_rigidbody);
     }
 
     protected override void HandlePhysics()
@@ -42,7 +48,7 @@ public class AirplaneController : RigidbodyControllerBase
             return;
 
         HandleEngines();
-        HandleAerodynamics();
+        HandleFlightModel();
         HandleSteering();
         HandleBrakes();
         HandleAltitude();
@@ -59,8 +65,10 @@ public class AirplaneController : RigidbodyControllerBase
         }
     }
 
-    private void HandleAerodynamics()
+    private void HandleFlightModel()
     {
+        if (flightModel != null)
+            flightModel.UpdateFlightModel();
     }
 
     private void HandleSteering()
