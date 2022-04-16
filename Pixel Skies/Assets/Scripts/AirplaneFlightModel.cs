@@ -21,6 +21,8 @@ public class AirplaneFlightModel : MonoBehaviour
     public float maxLiftForce = 800f;
     public AnimationCurve liftCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
+    [Header("Drag Attributes")] public float dragFactor = 0.01f;
+
     public void InitializeFlightModel(Rigidbody rb)
     {
         _rigidbody = rb;
@@ -60,5 +62,10 @@ public class AirplaneFlightModel : MonoBehaviour
 
     private void CalculateDrag()
     {
+        var parasiteDrag = forwardSpeed * dragFactor;
+        var totalDrag = _initialDrag + parasiteDrag;
+
+        _rigidbody.drag = totalDrag;
+        _rigidbody.angularDrag = _initialAngularDrag * forwardSpeed;
     }
 }

@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3600d4a3205053245ab039a819e5dff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxForce: 1000
+  maxForce: 2500
   maxRpm: 2550
   powerCurve:
     serializedVersion: 2
@@ -408,8 +408,8 @@ Rigidbody:
   m_GameObject: {fileID: 495632415}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 0.01
+  m_AngularDrag: 0.01
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -445,7 +445,7 @@ MonoBehaviour:
   input: {fileID: 495632418}
   flightModel: {fileID: 495632421}
   centerOfGravityPosition: {fileID: 635018625}
-  airplaneWeight: 400
+  airplaneWeight: 583
   engines:
   - {fileID: 202904231}
   wheels:
@@ -562,7 +562,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardSpeed: 0
   speedInKnots: 0
-  maxLiftForce: 800
+  maxSpeedInKnots: 101
+  maxLiftForce: 10000
+  liftCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.47687575
+      value: 0.7351213
+      inSlope: 1.4984226
+      outSlope: 1.4984226
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dragFactor: 0.01
 --- !u!1 &595631724
 GameObject:
   m_ObjectHideFlags: 0
