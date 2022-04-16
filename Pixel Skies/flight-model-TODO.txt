@@ -1,0 +1,44 @@
+Controls:
+- Pitch, roll, and yaw response should be proportional to airflow speed over
+  control surfaces
+
+Handling:
+- Thrust should account for inertia when rolling from standstill
+
+
+Flight Data required:
+- Pitch angle (relative to ground)
+- Roll angle (relative to ground
+- Yaw angle (relative to direction of travel)
+
+- Ground speed (relative to flat ground)
+- Airspeed (relative to RAF)
+- Angle of attack (to relative airflow)
+
+Flight data constants:
+- Aircraft weight
+- Aircraft max speed
+- Max AoA (stalling AoA)
+- CoG position
+- CoP position
+- Drag factor (Estimation of overall form drag etc)
+
+Aircraft logic components:
+- Input (Capture user input)
+- Flight controller (Orchestrate flight logic)
+- Flight data (Capture data points)
+- Flight model (Handle aerodynamic / drag forces)
+- Engines (Handle thrust forces)
+- Wheels (Handle wheel colliders / steering / braking)
+
+
+Test cases for play test:
+- AC should not be able to pitch / roll / yaw while stationary on the ground
+- AC control effectiveness should be less effective at low speed (i.e. in the flare)
+- AC should be able to fly upside down briefly without breaking everything
+- AC should be able to fly vertically up / down with realistic handling
+- AoA should be correctly calculated from RAF (test using steep flight path)
+- AC should stall if max AoA exceeded
+- Lift should act through CoP, weight should act through CoG. When engine is cut, nose should drop.
+- AC speed should decrease in steep climb
+- AC speed should increase in steep dive
