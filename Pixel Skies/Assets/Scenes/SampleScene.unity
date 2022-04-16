@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd02f86f71be8a44f923592466365353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThrottleSpeed: 0.3
+  ThrottleSpeed: 0.8
   MaxFlapIncrements: 2
   BrakeKey: 32
 --- !u!114 &495632419
@@ -562,6 +562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardSpeed: 0
   speedInKnots: 0
+  maxLiftForce: 800
 --- !u!1 &595631724
 GameObject:
   m_ObjectHideFlags: 0

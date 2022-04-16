@@ -13,6 +13,7 @@ public class AirplaneFlightModel : MonoBehaviour
     [Header("Flight Attributes")]
     public float forwardSpeed;
     public float speedInKnots;
+    public float maxLiftForce = 800f;
 
     public void InitializeFlightModel(Rigidbody rb)
     {
@@ -39,6 +40,11 @@ public class AirplaneFlightModel : MonoBehaviour
 
     private void CalculateLift()
     {
+        var liftDirection = transform.up;
+        var liftForce = forwardSpeed * maxLiftForce;
+
+        var finalLiftForce = liftDirection * liftForce;
+        _rigidbody.AddForce(finalLiftForce);
     }
 
     private void CalculateDrag()
