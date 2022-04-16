@@ -39,7 +39,7 @@ public class AirplaneController : RigidbodyControllerBase
 
         flightModel = GetComponent<AirplaneFlightModel>();
         if (flightModel != null)
-            flightModel.InitializeFlightModel(_rigidbody);
+            flightModel.InitializeFlightModel(_rigidbody, input);
     }
 
     protected override void HandlePhysics()

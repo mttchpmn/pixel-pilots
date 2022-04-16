@@ -757,7 +757,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 66
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &495632418
 MonoBehaviour:
@@ -942,6 +942,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   dragFactor: 0.0001
+  pitchSensitivity: 5000
+  rollSensitivity: 5000
 --- !u!1 &595631724
 GameObject:
   m_ObjectHideFlags: 0

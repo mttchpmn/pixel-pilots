@@ -8,6 +8,7 @@ public class AirplaneFlightModel : MonoBehaviour
     private const float MpsToKnotFactor = 1.94384f;
     
     private Rigidbody _rigidbody;
+    private AirplaneInputBase _input;
     
     private float _initialDrag;
     private float _initialAngularDrag;
@@ -16,6 +17,7 @@ public class AirplaneFlightModel : MonoBehaviour
     private float _normalizedSpeedInKnots;
 
     private float _angleOfAttack;
+    private float _pitchAngle;
     
     [Header("Speed Attributes")]
     public float forwardSpeed;
@@ -28,8 +30,13 @@ public class AirplaneFlightModel : MonoBehaviour
 
     [Header("Drag Attributes")] public float dragFactor = 0.01f;
 
-    public void InitializeFlightModel(Rigidbody rb)
+    [Header("Controls Attributes")]
+    public float pitchSensitivity = 10f;
+    public float rollSensitivity = 10f;
+
+    public void InitializeFlightModel(Rigidbody rb, AirplaneInputBase input)
     {
+        _input = input;
         _rigidbody = rb;
         _initialDrag = rb.drag;
         _initialAngularDrag = rb.angularDrag;
@@ -44,7 +51,22 @@ public class AirplaneFlightModel : MonoBehaviour
         CalculateForwardSpeed();
         CalculateLift();
         CalculateDrag();
+
+        HandlePitch();
+        
         HandleRigidBodyTransform();
+    }
+
+    private void HandlePitch()
+    {
+        var flatForwardDirection = transform.forward;
+        flatForwardDirection.y = 0f;
+
+        _pitchAngle = Vector3.Angle(transform.forward, flatForwardDirection);
+        Debug.Log($"Pitch angle: {_pitchAngle}");
+
+        var pitchTorque = _input.Pitch * pitchSensitivity * transform.right;
+        _rigidbody.AddTorque(pitchTorque);
     }
 
     private void HandleRigidBodyTransform()
