@@ -18,6 +18,7 @@ public class AirplaneFlightModel : MonoBehaviour
 
     private float _angleOfAttack;
     private float _pitchAngle;
+    private float _rollAngle;
     
     [Header("Speed Attributes")]
     public float forwardSpeed;
@@ -53,20 +54,35 @@ public class AirplaneFlightModel : MonoBehaviour
         CalculateDrag();
 
         HandlePitch();
+        HandleRoll();
         
         HandleRigidBodyTransform();
     }
 
     private void HandlePitch()
     {
-        var flatForwardDirection = transform.forward;
-        flatForwardDirection.y = 0f;
+        var flatForward = transform.forward;
+        flatForward.y = 0f;
+        flatForward = flatForward.normalized;
 
-        _pitchAngle = Vector3.Angle(transform.forward, flatForwardDirection);
+        _pitchAngle = Vector3.Angle(transform.forward, flatForward);
         Debug.Log($"Pitch angle: {_pitchAngle}");
 
         var pitchTorque = _input.Pitch * pitchSensitivity * transform.right;
         _rigidbody.AddTorque(pitchTorque);
+    }
+
+    private void HandleRoll()
+    {
+        var flatRight = transform.right;
+        flatRight.y = 0;
+        flatRight = flatRight.normalized;
+
+        _rollAngle = Vector3.Angle(transform.right, flatRight);
+        Debug.Log($"Roll angle: {_rollAngle}");
+
+        var rollTorque = _input.Roll * rollSensitivity * transform.forward;
+        _rigidbody.AddTorque(rollTorque * -1);
     }
 
     private void HandleRigidBodyTransform()
